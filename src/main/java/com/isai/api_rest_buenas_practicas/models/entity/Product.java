@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.hibernate.validator.constraints.Length;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,4 +41,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @NotNull
+    @Column(columnDefinition = "BIT(1) DEFAULT: 0")
+    private Boolean status;
 }
