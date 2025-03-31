@@ -39,10 +39,10 @@ public class Product {
     private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @NotNull
-    @Column(columnDefinition = "BIT(1) DEFAULT: 0")
+    @Column(columnDefinition = "BIT(1) DEFAULT 0")
     private Boolean status;
 }
