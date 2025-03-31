@@ -8,7 +8,9 @@ import com.isai.api_rest_buenas_practicas.exceptions.CategoryNotFoundException;
 import com.isai.api_rest_buenas_practicas.exceptions.ProductNotFoundException;
 import com.isai.api_rest_buenas_practicas.mapper.ProductMapper;
 import com.isai.api_rest_buenas_practicas.models.dtos.CategoryResponse;
+import com.isai.api_rest_buenas_practicas.models.dtos.CreateProductRequest;
 import com.isai.api_rest_buenas_practicas.models.dtos.ProductResponse;
+import com.isai.api_rest_buenas_practicas.models.entity.Product;
 import com.isai.api_rest_buenas_practicas.repository.CategoryRepository;
 import com.isai.api_rest_buenas_practicas.repository.ProductRepository;
 import com.isai.api_rest_buenas_practicas.service.CrudService;
@@ -18,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ProductService
-        implements CrudService<ProductResponse, CategoryResponse> {
+        implements CrudService<ProductResponse, CategoryResponse, CreateProductRequest> {
 
     private final ProductRepository productRepository;
 
@@ -52,9 +54,20 @@ public class ProductService
     }
 
     @Override
-    public ProductResponse save(ProductResponse entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    public ProductResponse save(CreateProductRequest request) {
+        return categoryRepository.findById(request.getCategoryId())
+                .map(category -> {
+                    Product product = new Product();
+                    product.setNameProduct(request.getNameProduct());
+                    product.setDescription(request.getDescription());
+                    product.setPrice(request.getPrice());
+                    product.setCategory(category);
+                    product.setStatus(true);
+                    return productRepository.save(product);
+                })
+                .map(product -> productMapper.toProductResponse(product))
+                .orElseThrow(() -> new CategoryNotFoundException());
+
     }
 
     @Override
