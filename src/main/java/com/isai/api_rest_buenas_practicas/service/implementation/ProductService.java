@@ -71,9 +71,20 @@ public class ProductService
     }
 
     @Override
-    public ProductResponse update(Long id, CategoryResponse request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public ProductResponse update(Long idProduct, CreateProductRequest request) {
+        return productRepository.findById(idProduct)
+                .map(product -> categoryRepository
+                        .findById(request.getCategoryId())
+                        .map(category -> {
+                            product.setPrice(request.getPrice());
+                            product.setDescription(request.getDescription());
+                            product.setNameProduct(request.getNameProduct());
+                            product.setCategory(category);
+                            return productRepository.save(product);
+                        })
+                        .orElseThrow(() -> new CategoryNotFoundException()))
+                .map(product -> productMapper.toProductResponse(product))
+                .orElseThrow(() -> new ProductNotFoundException());
     }
 
     @Override

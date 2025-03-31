@@ -11,7 +11,7 @@ public interface CrudService<T, R, Y> {
 
     T save(Y entity);
 
-    T update(Long id, R request);
+    T update(Long id, Y request);
 
     void deleteById(Long id);
 }
