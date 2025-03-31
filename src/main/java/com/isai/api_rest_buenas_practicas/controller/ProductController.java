@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,6 +23,11 @@ public class ProductController {
     @GetMapping("/findAllProducts")
     public List<ProductResponse> findAllProducts() {
         return productService.findAll();
+    }
+
+    @GetMapping("/findByIdProduct/{idProduct}")
+    public ProductResponse findByIdProduct(@Validated @PathVariable Long idProduct) {
+        return productService.findById(idProduct);
     }
 
 }
