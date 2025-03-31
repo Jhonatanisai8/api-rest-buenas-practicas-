@@ -31,7 +31,7 @@ public class Product {
     @NotEmpty
     private String nameProduct;
 
-    @Length(max = 100)
+    @Length(max = 255)
     @NotEmpty
     private String description;
 
