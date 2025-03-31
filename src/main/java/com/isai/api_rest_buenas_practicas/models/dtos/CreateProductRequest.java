@@ -14,7 +14,7 @@ import lombok.Setter;
 public class CreateProductRequest {
 
     @NotEmpty(message = "Name is required")
-    private String name;
+    private String nameProduct;
 
     private String description;
 

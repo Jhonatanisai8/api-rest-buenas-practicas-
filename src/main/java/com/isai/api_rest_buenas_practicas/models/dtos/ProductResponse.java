@@ -12,7 +12,7 @@ import lombok.Getter;
 @JsonInclude(JsonInclude.Include.NON_NULL) // algun campo sea nulo no se muestra en la respuesta
 public class ProductResponse {
     private Long productId;
-    private String name;
+    private String nameProduct;
     private String description;
     private BigDecimal price;
     private CategoryResponse category;
