@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: api-rest-buenas-practicas
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/bd_api_buenas_practicas?serverTimezone=UTC
+    username: root
+    password: 753159852
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true 
