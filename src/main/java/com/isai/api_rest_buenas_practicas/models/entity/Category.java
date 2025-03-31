@@ -23,7 +23,7 @@ public class Category {
 
     @Length(max = 30)
     @NotEmpty
-    private String name;
+    private String nameCategory;
 
     @Length(max = 30)
     @NotEmpty

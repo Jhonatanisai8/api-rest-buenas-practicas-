@@ -29,7 +29,7 @@ public class Product {
 
     @Length(max = 50)
     @NotEmpty
-    private String name;
+    private String nameProduct;
 
     @Length(max = 100)
     @NotEmpty
@@ -39,7 +39,7 @@ public class Product {
     private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @NotNull
