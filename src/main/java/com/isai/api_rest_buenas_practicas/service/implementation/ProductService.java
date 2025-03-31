@@ -89,8 +89,10 @@ public class ProductService
 
     @Override
     public void deleteById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+        if (!productRepository.findById(id).isPresent()) {
+            throw new ProductNotFoundException();
+        }
+        productRepository.deleteById(id);
     }
 
 }
