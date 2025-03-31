@@ -30,4 +30,10 @@ public class ProductController {
         return productService.findById(idProduct);
     }
 
+    //lista todos los productos de una categoria
+    @GetMapping("/category/{idCategory}")
+    public List<ProductResponse> findAllByCategoryId(@Validated @PathVariable Long idCategory) {
+        return productService.findAllByCategoryId(idCategory);
+    }
+
 }
